@@ -1,0 +1,61 @@
+<html>
+<head>
+	<meta name=viewport content="width=device-width,initial-scale=1">
+	<link rel=apple-touch-icon href=apple-touch-icon.png>
+	<title>Demonstration of Intercom - Old and New Messenger side by side</title>
+</head>
+<body style="text-align: center;">	
+<h1>Demonstration of Intercom - Old and New Messenger side by side</h1>
+<ul style="list-style: none">
+	<li><a id="normal" href="?">Normal</a></li>
+	<li><a id="activatorId" href="?custom_activator=id">Custom Activator by ID</a></li>
+	<li><a id="activatorClass" href="?custom_activator=class">Custom Activator by Class</a></li>
+	<li><a id="selective1" href="?selectively_show=1">Selectively Show: Valid user (i.e. show icon)</a></li>
+ 	<li><a id="selective0" href="?selectively_show=0">Selectively Show: Invalid user (i.e. hide icon)</a></li>
+ 	<li><a href="old.html">Show page only for Old Messenger</a></li>
+ 	<li><a href="new.html">Show page only for New Messenger</a></li>
+</ul>
+<div style="margin: 0 auto; text-align: center;">
+	<iframe id="fOld" width="45%" height="70%"></iframe>
+	<iframe id="fNew" width="45%" height="70%"></iframe>	
+</div>
+
+<script>
+	var fOld = document.getElementById('fOld');
+	var fNew = document.getElementById('fNew');
+	function clickHandler(e, href){
+		e.preventDefault;
+		var data = href;
+		if(!href) data = this.href;
+		data = data.split("?");
+		url = data[data.length-1];
+		fOld.src = "old.html?hidelinks=1&" + url;
+		fNew.src = "new.html?hidelinks=1&" + url;
+		return false;
+	}
+	document.getElementById('normal').onclick = clickHandler;
+	document.getElementById('activatorId').onclick = clickHandler;
+	document.getElementById('activatorClass').onclick = clickHandler;
+	document.getElementById('selective1').onclick = clickHandler;
+	document.getElementById('selective0').onclick = clickHandler;
+
+var query = document.location.search;
+if(query.match(/custom_activator=id/)){
+	document.getElementById('activatorId').click();
+}
+else if(query.match(/custom_activator=class/)){
+	document.getElementById('activatorClass').click();
+}
+else if(query.match(/selectively_show=1/)){
+	document.getElementById('selective1').click();
+}
+else if(query.match(/selectively_show=0/)){
+	document.getElementById('selective0').click();
+}
+else{
+	document.getElementById('normal').click();
+}
+
+</script>
+</body>
+</html>

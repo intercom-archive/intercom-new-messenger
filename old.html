@@ -1,0 +1,94 @@
+<html>
+<head>
+	<meta name=viewport content="width=device-width,initial-scale=1">
+	<link rel=apple-touch-icon href=apple-touch-icon.png>
+	<title>Demonstration of Intercom - Old Messenger</title>
+	<style>img { max-width: 100% } </style>
+</head>
+<body>	
+<h1>Demonstration of Intercom - Old Messenger</h1>
+<ul id="links">
+	<li><a href="?">Normal</a></li>
+	<li><a href="?custom_activator=id">Custom Activator by ID</a></li>
+	<li><a href="?custom_activator=class">Custom Activator by Class</a></li>
+	<li><a href="?selectively_show=1">Selectively Show: Valid user (i.e. show icon)</a></li>
+ 	<li><a href="?selectively_show=0">Selectively Show: Invalid user (i.e. hide icon)</a></li>
+</ul>
+
+<h3>Code to use</h3>
+<textarea id="log" style="width: 100%; height: 7em; font-size: 1.7em; font-family: monospace">
+</textarea>
+<p id="notes">See how to do this in the <a href="new.html">New Messenger</a><br>
+See differences between <a href="a.html">old and new Messenger</a></p>
+
+<div id="custom_activator_id" style='display:none'>
+	<ul>
+		<li><a href="#" id="customActivator">Custom Activator by ID</a></li>
+	</ul>
+</div>
+<div id="custom_activator_class" style='display:none'>
+	<ul>
+		<li><a href="#" class="customActivator">Custom Activator 1 by Class</a></li>
+		<li><a href="#" class="customActivator">Custom Activator 2 by Class</a></li>
+	</ul>
+</div>
+
+<div id="selectively_show" style='display:none'>
+	<h4>In order for this to work you need to hide the icon in App Settings > Messenger  Settings</h4>
+  	<img src="https://monosnap.com/file/ziCxU8OZkyUPSsS4tSJE7676fFxFhH.png" />
+</div>
+
+
+<script>
+var APP_ID = 'qji82zks'; //Tim app
+var query = document.location.search;
+if(query.match(/hidelinks=1/)){
+	document.getElementById('custom_activator_id').style='display:none';
+	document.getElementById('links').style='display:none';
+}
+if(query.match(/custom_activator=id/)){
+	document.getElementById('custom_activator_id').style='';
+	window.intercomSettings = { 
+		app_id: APP_ID, 
+		widget: {
+			activator: "#customActivator"
+		}
+	};
+}
+else if(query.match(/custom_activator=class/)){
+	document.getElementById('custom_activator_class').style='';
+	window.intercomSettings = { 
+		app_id: APP_ID, 
+		widget: {
+			activator: ".customActivator"
+		}
+	};
+}
+else if(query.match(/selectively_show=1/)){
+	document.getElementById('selectively_show').style='';
+	window.intercomSettings = { 
+		app_id: APP_ID, 
+		widget: {
+			activator: "#IntercomDefaultWidget"
+		}
+	};
+}
+else if(query.match(/selectively_show=0/)){
+	document.getElementById('selectively_show').style='';
+	window.intercomSettings = { 
+		app_id: APP_ID, 
+	};
+}
+else{
+	window.intercomSettings = { app_id: APP_ID };
+}
+
+document.getElementById("log").value = JSON.stringify(window.intercomSettings,null,2);
+
+
+
+(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;
+s.src='https://widget.intercom.io/widget/'+APP_ID;var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
+</script>
+</body>
+</html>
