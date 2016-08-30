@@ -8,10 +8,13 @@
 <h1>Demonstration of Intercom - Old and New Messenger side by side</h1>
 <ul style="list-style: none">
 	<li><a id="normal" href="?">Normal</a></li>
+	<li><a id="activatorIdHide" href="?custom_activator=hide">Custom Activator by ID and force hide icon in new messenger</a></li>
 	<li><a id="activatorId" href="?custom_activator=id">Custom Activator by ID</a></li>
 	<li><a id="activatorClass" href="?custom_activator=class">Custom Activator by Class</a></li>
 	<li><a id="selective1" href="?selectively_show=1">Selectively Show: Valid user (i.e. show icon)</a></li>
  	<li><a id="selective0" href="?selectively_show=0">Selectively Show: Invalid user (i.e. hide icon)</a></li>
+</ul>
+<ul style="list-style: none">
  	<li><a href="old.html">Show page only for Old Messenger</a></li>
  	<li><a href="new.html">Show page only for New Messenger</a></li>
 </ul>
@@ -36,6 +39,7 @@
 	document.getElementById('normal').onclick = clickHandler;
 	document.getElementById('activatorId').onclick = clickHandler;
 	document.getElementById('activatorClass').onclick = clickHandler;
+	document.getElementById('activatorIdHide').onclick = clickHandler;
 	document.getElementById('selective1').onclick = clickHandler;
 	document.getElementById('selective0').onclick = clickHandler;
 
@@ -45,6 +49,9 @@ if(query.match(/custom_activator=id/)){
 }
 else if(query.match(/custom_activator=class/)){
 	document.getElementById('activatorClass').click();
+}
+else if(query.match(/custom_activator=hide/)){
+	document.getElementById('activatorIdHide').click();
 }
 else if(query.match(/selectively_show=1/)){
 	document.getElementById('selective1').click();

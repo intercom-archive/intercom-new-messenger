@@ -10,6 +10,7 @@
 <ul id="links">
   <li><a href="?">Normal</a></li>
   <li><a href="?custom_activator=id">Custom Activator by ID</a></li>
+  <li><a href="?custom_activator=hide">Custom Activator by ID and force hide icon</a></li>
   <li><a href="?custom_activator=class">Custom Activator by Class</a></li>
   <li><a href="?selectively_show=1">Selectively Show: Valid user (i.e. show icon)</a></li>
   <li><a href="?selectively_show=0">Selectively Show: Invalid user (i.e. hide icon)</a></li>
@@ -41,7 +42,7 @@ See differences between <a href="index.html">old and new Messenger</a></p>
 var APP_ID = 'eibevd3r';
 var query = document.location.search;
 if(query.match(/hidelinks=1/)){
-  document.getElementById('custom_activator_id').style='display:none';
+  document.getElementById('notes').style='display:none';
   document.getElementById('links').style='display:none';
 }
 if(query.match(/custom_activator=id/)){
@@ -58,6 +59,14 @@ else if(query.match(/custom_activator=class/)){
     custom_launcher_selector: ".customActivator"
   };
 }
+else if(query.match(/custom_activator=hide/)){
+  document.getElementById('custom_activator_id').style='';
+  window.intercomSettings = { 
+    app_id: APP_ID, 
+    custom_launcher_selector: "#customActivator",
+    hide_default_launcher: true
+  };
+}
 else if(query.match(/selectively_show=1/)){
   document.getElementById('selectively_show').style='';
   window.intercomSettings = { 
@@ -69,7 +78,7 @@ else if(query.match(/selectively_show=0/)){
   document.getElementById('selectively_show').style='';
   window.intercomSettings = { 
     app_id: APP_ID, 
-    hide_default_launcher: false
+    hide_default_launcher: true
   };
 }
 else{

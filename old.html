@@ -43,10 +43,10 @@ See differences between <a href="a.html">old and new Messenger</a></p>
 var APP_ID = 'qji82zks'; //Tim app
 var query = document.location.search;
 if(query.match(/hidelinks=1/)){
-	document.getElementById('custom_activator_id').style='display:none';
+	document.getElementById('notes').style='display:none';
 	document.getElementById('links').style='display:none';
 }
-if(query.match(/custom_activator=id/)){
+if(query.match(/custom_activator=id/) || query.match(/custom_activator=hide/)){
 	document.getElementById('custom_activator_id').style='';
 	window.intercomSettings = { 
 		app_id: APP_ID, 
